@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/emergencycontacts.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -29,7 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EmergencyContacts(),
+                  ),
+                );
+              },
               child: const Text("EMERGENCY CONTACTS"),
             ),
           ],
