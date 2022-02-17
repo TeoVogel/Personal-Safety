@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_safety/goBackButton.dart';
+import 'package:personal_safety/widgets/go_back_button.dart';
 import 'package:personal_safety/utils/notification_service.dart';
 
 class HomeScreenDrawer extends StatelessWidget {

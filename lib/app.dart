@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_safety/homescreen.dart';
+import 'package:personal_safety/screens/homescreen/homescreen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

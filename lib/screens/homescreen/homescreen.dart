@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_safety/emergencycontacts.dart';
-import 'package:personal_safety/homescreenDrawer.dart';
+import 'package:personal_safety/screens/emergency_contacts/emergency_contacts.dart';
+import 'package:personal_safety/screens/homescreen/homescreen_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
