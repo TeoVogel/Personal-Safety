@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/goBackButton.dart';
+import 'package:personal_safety/utils/notification_service.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
   const HomeScreenDrawer({Key? key}) : super(key: key);
@@ -25,7 +26,9 @@ class HomeScreenDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      NotificationService().showNotification();
+                    },
                     label: const Text("SETTINGS"),
                     icon: const Icon(Icons.settings_outlined),
                   ),
