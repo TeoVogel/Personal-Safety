@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/widgets/go_back_button.dart';
 
 class EmergencyContacts extends StatelessWidget {
   const EmergencyContacts({Key? key}) : super(key: key);
@@ -7,7 +8,17 @@ class EmergencyContacts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Emergency Contacts"),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: const [
+            Align(alignment: Alignment.centerLeft, child: GoBackButton()),
+            SizedBox(height: 16),
+            Text("Emergency Contacts"),
+          ],
+        ),
+        toolbarHeight: 120,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -50,7 +61,7 @@ class EmergencyContacts extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: OutlinedButton(
                                   onPressed: () {},
                                   child: const Text("EDIT"),

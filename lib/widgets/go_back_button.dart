@@ -7,11 +7,8 @@ class GoBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      style: getGoBackButtonStyle(),
-      label: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text("GO BACK"),
-      ),
+      style: ThemeUtils.getGoBackButtonStyle(),
+      label: Text("GO BACK"),
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
         Navigator.pop(context);
