@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/screens/emergency_contacts/emergency_contacts.dart';
 import 'package:personal_safety/screens/homescreen/homescreen_drawer.dart';
+import 'package:personal_safety/theme/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -52,9 +53,30 @@ class HomeScreen extends StatelessWidget {
                     )),
               ),
               const Spacer(),
-              const Icon(
-                Icons.check,
-                size: 200,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(
+                  Icons.check_circle_outline_outlined,
+                  size: 250,
+                  color: colorPrimary.withAlpha(125),
+                ),
+              ),
+              Text(
+                "You are set for the day!",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 24),
+              Text(
+                "Next check-in:\nTomorrow 8:00AM to 9:00AM",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(fontWeight: FontWeight.normal),
+                textAlign: TextAlign.center,
               ),
               const Spacer(),
               ElevatedButton(
