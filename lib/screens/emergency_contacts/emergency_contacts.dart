@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/screens/emergency_contacts/edit_emergency_contact.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
+
+import '../../models/emergency_contact.dart';
 
 class EmergencyContacts extends StatelessWidget {
   const EmergencyContacts({Key? key}) : super(key: key);
@@ -26,7 +29,7 @@ class EmergencyContacts extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < 2; i++)
               Card(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +66,18 @@ class EmergencyContacts extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const EditEmergencyContact(
+                                          emergencyContact: EmergencyContact(
+                                              "Susan", "+1 123 456789"),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   child: const Text("EDIT"),
                                 ),
                               ),
@@ -77,7 +91,14 @@ class EmergencyContacts extends StatelessWidget {
               ),
             const Spacer(),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EditEmergencyContact(),
+                  ),
+                );
+              },
               label: const Text("ADD CONTACT"),
               icon: const Icon(Icons.add),
             ),
