@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 import 'package:personal_safety/utils/notification_service.dart';
 
+import '../settings/settings.dart';
+
 class HomeScreenDrawer extends StatelessWidget {
   const HomeScreenDrawer({Key? key}) : super(key: key);
 
@@ -27,7 +29,12 @@ class HomeScreenDrawer extends StatelessWidget {
                 children: [
                   OutlinedButton.icon(
                     onPressed: () {
-                      NotificationService().showNotification();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Settings(),
+                        ),
+                      );
                     },
                     label: const Text("SETTINGS"),
                     icon: const Icon(Icons.settings_outlined),
