@@ -7,9 +7,9 @@ const onColorPrimary = Colors.white;
 const colorSecondary = Color(0xFFE6AE47);
 const onColorSecondary = Colors.white;
 const colorAccent = colorSecondary;
-Color colorBackground = lighten(colorPrimary, 94);
+Color colorBackground = lighten(colorPrimary, 92);
 const onColorBackground = Colors.black;
-const colorSurface = Colors.white;
+Color colorSurface = lighten(colorPrimary, 96);
 const onColorSurface = onColorBackground;
 
 /// Construct a color from a hex code string, of the format #RRGGBB.

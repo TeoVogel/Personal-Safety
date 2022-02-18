@@ -25,7 +25,6 @@ class Settings extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: ListView(
           children: <Widget>[
-            const SizedBox(height: 24),
             _buildCardContents(
               "Check-in period",
               "7:00 - 8:00",
@@ -38,7 +37,7 @@ class Settings extends StatelessWidget {
               },
               context,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             _buildCardContents(
               "Buffer period",
               "8:00 - 9:00",
@@ -51,14 +50,13 @@ class Settings extends StatelessWidget {
               },
               context,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             _buildCardContents(
               "Safety prompts frequency",
               "15 min",
               () {},
               context,
             ),
-            const SizedBox(height: 24),
           ],
         ),
       ),

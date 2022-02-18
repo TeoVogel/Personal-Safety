@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/theme/colors.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 import 'package:personal_safety/utils/notification_service.dart';
 
@@ -21,7 +22,7 @@ class HomeScreenDrawer extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            color: const Color.fromARGB(255, 217, 229, 249),
+            color: lighten(colorPrimary, 80),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

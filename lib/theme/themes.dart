@@ -57,9 +57,9 @@ abstract class ThemeUtils {
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
   );
 
-  static const double smallShapeBorderRadiusAmount = 4;
-  static const double mediumShapeBorderRadiusAmount = 8;
-  static const double largeShapeBorderRadiusAmount = 16;
+  static const double smallShapeBorderRadiusAmount = 12;
+  static const double mediumShapeBorderRadiusAmount = 16;
+  static const double largeShapeBorderRadiusAmount = 20;
 
   static final smallShapeBorderRadius =
       BorderRadius.circular(smallShapeBorderRadiusAmount);
