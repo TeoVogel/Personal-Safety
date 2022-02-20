@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/theme/themes.dart';
+import 'package:personal_safety/utils/checkin_time_preferences.dart';
 
 import 'package:personal_safety/widgets/go_back_button.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+class Settings extends StatefulWidget {
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  TimeOfDay? checkInTime;
+  String? checkInTimeLabel;
+  String? bufferTimeLabel;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCheckInTimePreferences();
+  }
+
+  void fetchCheckInTimePreferences() async {
+    final TimeOfDay timePref = await getCheckInTime();
+    setState(() {
+      checkInTime = timePref;
+      final minutesLabel = timePref.minute == 0
+          ? "00"
+          : timePref.minute < 10
+              ? "0${timePref.minute}"
+              : "${timePref.minute}";
+      checkInTimeLabel =
+          "${timePref.hour}:$minutesLabel - ${timePref.hour + 1}:$minutesLabel";
+      bufferTimeLabel =
+          "${timePref.hour + 1}:$minutesLabel - ${timePref.hour + 2}:$minutesLabel";
+    });
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,27 +57,34 @@ class Settings extends StatelessWidget {
           children: <Widget>[
             _buildCardContents(
               "Check-in period",
-              "7:00 - 8:00",
+              checkInTimeLabel,
               () {
-                showTimePicker(
+                if (checkInTime == null) return;
+                Future<TimeOfDay?> selectedTime = showTimePicker(
                   context: context,
-                  initialTime: const TimeOfDay(hour: 7, minute: 0),
+                  initialTime: checkInTime!,
                   initialEntryMode: TimePickerEntryMode.input,
+                  builder: (BuildContext context, Widget? child) {
+                    return MediaQuery(
+                      data: MediaQuery.of(context)
+                          .copyWith(alwaysUse24HourFormat: true),
+                      child: child!,
+                    );
+                  },
                 );
+                selectedTime.then((value) async {
+                  if (value == null) return;
+                  setCheckInTime(value);
+                  fetchCheckInTimePreferences();
+                });
               },
               context,
             ),
             const SizedBox(height: 8),
             _buildCardContents(
               "Buffer period",
-              "8:00 - 9:00",
-              () {
-                showTimePicker(
-                  context: context,
-                  initialTime: const TimeOfDay(hour: 8, minute: 0),
-                  initialEntryMode: TimePickerEntryMode.input,
-                );
-              },
+              bufferTimeLabel,
+              () {},
               context,
             ),
             const SizedBox(height: 8),
@@ -63,7 +100,7 @@ class Settings extends StatelessWidget {
     );
   }
 
-  Widget _buildCardContents(title, content, action, context) => Card(
+  Widget _buildCardContents(title, String? content, action, context) => Card(
         child: InkWell(
           onTap: action,
           borderRadius: ThemeUtils.mediumShapeBorderRadius,
@@ -79,7 +116,7 @@ class Settings extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  content,
+                  content ?? "",
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 Padding(
