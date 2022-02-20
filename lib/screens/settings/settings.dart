@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/theme/themes.dart';
 import 'package:personal_safety/utils/checkin_time_preferences.dart';
+import 'package:personal_safety/utils/notification_service.dart';
 
 import 'package:personal_safety/widgets/go_back_button.dart';
 
@@ -76,6 +77,7 @@ class _SettingsState extends State<Settings> {
                   if (value == null) return;
                   setCheckInTime(value);
                   fetchCheckInTimePreferences();
+                  NotificationService().programNotification(value);
                 });
               },
               context,

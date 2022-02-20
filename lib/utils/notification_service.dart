@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -33,13 +36,15 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: selectNotification);
+
+    tz.initializeTimeZones();
   }
 
   Future selectNotification(String? payload) async {
     //Handle notification tapped logic here
   }
 
-  Future<void> showNotification() async {
+  Future<void> programNotification(TimeOfDay time) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
             "check_in_channel", //Required for Android 8.0 or after
@@ -63,15 +68,36 @@ class NotificationService {
       //threadIdentifier: String? (only from iOS 10 onwards)
     );
 
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
 
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      "Personal Safety",
-      "Time to check-in!",
-      platformChannelSpecifics,
-      payload: null,
+    DateTime now = DateTime.now();
+    DateTime scheduledDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
     );
+    if (scheduledDateTime.isBefore(now)) {
+      scheduledDateTime = scheduledDateTime.add(const Duration(days: 1));
+    }
+    DateTime utcScheduledDateTime = scheduledDateTime.toUtc();
+
+    print(now);
+    print(scheduledDateTime);
+    print(utcScheduledDateTime);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        1,
+        "Personal Safety",
+        "Time to check-in!",
+        tz.TZDateTime.from(utcScheduledDateTime, tz.UTC),
+        platformChannelSpecifics,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time);
   }
 }
