@@ -54,7 +54,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '595577006629',
     projectId: 'personal-safety-uottawa',
     storageBucket: 'personal-safety-uottawa.appspot.com',
-    iosClientId: '595577006629-op95so4ofh4kt9tq7ndhqd8crnj5g32l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.personalSafety',
+    iosClientId:
+        '595577006629-op95so4ofh4kt9tq7ndhqd8crnj5g32l.apps.googleusercontent.com',
+    iosBundleId: 'gng2102.uottawa.personalSafety',
   );
 }

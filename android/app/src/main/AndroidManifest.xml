@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.personal_safety">
+    package="gng2102.uottawa.personal_safety">
    <application
         android:label="personal_safety"
         android:name="${applicationName}"
