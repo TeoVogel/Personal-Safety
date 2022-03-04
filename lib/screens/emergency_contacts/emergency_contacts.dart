@@ -23,86 +23,88 @@ class EmergencyContacts extends StatelessWidget {
         toolbarHeight: 120,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            for (var i = 0; i < 2; i++)
-              Card(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Icon(
-                        Icons.person_outline,
-                        size: 48,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Susan",
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "+1 123 456789",
-                                style: Theme.of(context).textTheme.subtitle1,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const EditEmergencyContact(
-                                          emergencyContact: EmergencyContact(
-                                              "Susan", "+1 123 456789"),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text("EDIT"),
-                                ),
-                              ),
-                            ),
-                          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              for (var i = 0; i < 2; i++)
+                Card(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Icon(
+                          Icons.person_outline,
+                          size: 48,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            const Spacer(),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditEmergencyContact(),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Susan",
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "+1 123 456789",
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const EditEmergencyContact(
+                                            emergencyContact: EmergencyContact(
+                                                "Susan", "+1 123 456789"),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text("EDIT"),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              label: const Text("ADD CONTACT"),
-              icon: const Icon(Icons.add),
-            ),
-          ],
+                ),
+              const Spacer(),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditEmergencyContact(),
+                    ),
+                  );
+                },
+                label: const Text("ADD CONTACT"),
+                icon: const Icon(Icons.add),
+              ),
+            ],
+          ),
         ),
       ),
     );
