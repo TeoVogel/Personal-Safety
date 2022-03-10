@@ -4,7 +4,7 @@ import 'package:personal_safety/theme/colors.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 import 'package:personal_safety/utils/notification_service.dart';
 
-import '../settings/settings.dart';
+import '../settings/settings_screen.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
   const HomeScreenDrawer({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class HomeScreenDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Settings(),
+                          builder: (context) => SettingsScreen(),
                         ),
                       );
                     },

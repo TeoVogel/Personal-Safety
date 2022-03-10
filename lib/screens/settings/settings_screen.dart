@@ -5,12 +5,12 @@ import 'package:personal_safety/utils/notification_service.dart';
 
 import 'package:personal_safety/widgets/go_back_button.dart';
 
-class Settings extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   @override
-  State<Settings> createState() => _SettingsState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsScreenState extends State<SettingsScreen> {
   TimeOfDay? checkInTime;
   String? checkInTimeLabel;
   String? bufferTimeLabel;
@@ -22,18 +22,20 @@ class _SettingsState extends State<Settings> {
   }
 
   void fetchCheckInTimePreferences() async {
-    final TimeOfDay timePref = await getCheckInTime();
+    final TimeOfDay checkInTimePref = await getCheckInTime();
+    final TimeOfDay bufferWindowTimePref = await getBufferWindowTime();
+    final TimeOfDay emergencyWindowTimePref = await getEmergencyWindowTime();
     setState(() {
-      checkInTime = timePref;
-      final minutesLabel = timePref.minute == 0
+      checkInTime = checkInTimePref;
+      final minutesLabel = checkInTimePref.minute == 0
           ? "00"
-          : timePref.minute < 10
-              ? "0${timePref.minute}"
-              : "${timePref.minute}";
+          : checkInTimePref.minute < 10
+              ? "0${checkInTimePref.minute}"
+              : "${checkInTimePref.minute}";
       checkInTimeLabel =
-          "${timePref.hour}:$minutesLabel - ${timePref.hour + 1}:$minutesLabel";
+          "${checkInTimePref.hour}:$minutesLabel - ${bufferWindowTimePref.hour}:$minutesLabel";
       bufferTimeLabel =
-          "${timePref.hour + 1}:$minutesLabel - ${timePref.hour + 2}:$minutesLabel";
+          "${bufferWindowTimePref.hour}:$minutesLabel - ${emergencyWindowTimePref.hour}:$minutesLabel";
     });
   }
 
