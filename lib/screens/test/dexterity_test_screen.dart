@@ -1,91 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/screens/test/dexterity_test_widget.dart';
 
-class DexterityTestScreen extends StatefulWidget {
+class DexterityTestScreen extends StatelessWidget {
   const DexterityTestScreen({Key? key}) : super(key: key);
 
   @override
-  State<DexterityTestScreen> createState() => _DexterityTestScreenState();
-}
-
-class _DexterityTestScreenState extends State<DexterityTestScreen> {
-  final myController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Center(
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "You have missed your check-in time.",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          ?.copyWith(color: Colors.red),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "We want to make sure you are safe!",
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle1
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Type the word \"YES\" to proceed with the check-in:",
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: myController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        if (myController.text.toUpperCase() == "YES") {
-                          Navigator.pop(context);
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text('You failed the test. Try again.'),
-                          ));
-                        }
-                      },
-                      label: const Text("NEXT"),
-                      icon: const Icon(Icons.check),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+        child: DexterityTestWidget(),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
   }
 }

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/theme/colors.dart';
+import 'package:personal_safety/utils/checkin_helper.dart';
 
-import '../../utils/checkin_time_preferences.dart';
-
-class CheckInWindowWidget extends StatelessWidget {
-  const CheckInWindowWidget({Key? key, required this.checkInTimePref})
+class CheckedInWidget extends StatelessWidget {
+  const CheckedInWidget({Key? key, required this.nextCheckIn})
       : super(key: key);
 
-  final TimeOfDay checkInTimePref;
+  final DateTime nextCheckIn;
 
   String getCheckInTimeLabel() {
-    final minutesLabel = checkInTimePref.minute == 0
+    DateTime now = DateTime.now();
+    print("getCheckInTimeLabel");
+    print(now.day);
+    print(nextCheckIn.day);
+    String dayLabel = "Tomorrow";
+    if (now.day == nextCheckIn.day) {
+      dayLabel = "Today";
+    }
+    final minutesLabel = nextCheckIn.minute == 0
         ? "00"
-        : checkInTimePref.minute < 10
-            ? "0${checkInTimePref.minute}"
-            : "${checkInTimePref.minute}";
-    return "${checkInTimePref.hour}:$minutesLabel";
+        : nextCheckIn.minute < 10
+            ? "0${nextCheckIn.minute}"
+            : "${nextCheckIn.minute}";
+    return "$dayLabel ${nextCheckIn.hour}:$minutesLabel";
   }
 
   @override
@@ -33,7 +40,7 @@ class CheckInWindowWidget extends StatelessWidget {
           ),
         ),
         Text(
-          "You are set for the day!",
+          "You are checked-in!",
           style: Theme.of(context)
               .textTheme
               .headline5!
@@ -42,7 +49,7 @@ class CheckInWindowWidget extends StatelessWidget {
         ),
         SizedBox(height: 24),
         Text(
-          "Next check-in:\nTomorrow ${getCheckInTimeLabel()}",
+          "Next check-in:\n${getCheckInTimeLabel()}",
           style: Theme.of(context)
               .textTheme
               .headline6!
