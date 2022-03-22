@@ -6,16 +6,21 @@ import 'package:personal_safety/widgets/go_back_button.dart';
 
 import '../../models/emergency_contact.dart';
 
-class EmergencyContacts extends StatelessWidget {
+class EmergencyContacts extends StatefulWidget {
   const EmergencyContacts({Key? key, required this.userId}) : super(key: key);
 
   final String userId;
 
   @override
+  State<EmergencyContacts> createState() => _EmergencyContactsState();
+}
+
+class _EmergencyContactsState extends State<EmergencyContacts> {
+  @override
   Widget build(BuildContext context) {
     CollectionReference emergencyContacts = FirebaseFirestore.instance
         .collection('users')
-        .doc('a30wukbMEsxamPqV0G1w')
+        .doc(widget.userId)
         .collection('emergency-contacts');
 
     return Scaffold(
@@ -54,18 +59,25 @@ class EmergencyContacts extends StatelessWidget {
                   children: <Widget>[
                     for (var doc in snapshot.data!.docs)
                       EmergencyContactCard(
-                          name: doc["name"],
-                          number: doc["number"],
-                          onEdit: () {}),
+                        emergencyContactsReference: emergencyContacts,
+                        name: doc["name"],
+                        number: doc["number"],
+                        id: doc.id,
+                        onEdit: () {
+                          goToEditEmergencyContact(
+                            emergencyContacts,
+                            EmergencyContact(
+                              doc["name"],
+                              "${doc["number"]}",
+                              doc.id,
+                            ),
+                          );
+                        },
+                      ),
                     const Spacer(),
                     ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EditEmergencyContact(),
-                          ),
-                        );
+                        goToEditEmergencyContact(emergencyContacts, null);
                       },
                       label: const Text("ADD CONTACT"),
                       icon: const Icon(Icons.add),
@@ -82,5 +94,24 @@ class EmergencyContacts extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void goToEditEmergencyContact(CollectionReference emergencyContacts,
+      EmergencyContact? emergencyContact) {
+    Future.delayed(Duration.zero, () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EditEmergencyContact(
+            emergencyContactsReference: emergencyContacts,
+            emergencyContact: emergencyContact,
+          ),
+        ),
+      ).then(
+        (value) {
+          setState(() {});
+        },
+      );
+    });
   }
 }

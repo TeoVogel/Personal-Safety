@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/emergency_contact.dart';
@@ -6,13 +7,17 @@ import 'edit_emergency_contact.dart';
 class EmergencyContactCard extends StatelessWidget {
   const EmergencyContactCard({
     Key? key,
+    required this.emergencyContactsReference,
     required this.name,
     required this.number,
+    required this.id,
     required this.onEdit,
   }) : super(key: key);
 
+  final CollectionReference emergencyContactsReference;
   final String name;
   final int number;
+  final String id;
   final Function() onEdit;
 
   @override
@@ -44,7 +49,7 @@ class EmergencyContactCard extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "$number",
+                      "${number}",
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
@@ -53,17 +58,7 @@ class EmergencyContactCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditEmergencyContact(
-                                emergencyContact:
-                                    EmergencyContact(name, "$number"),
-                              ),
-                            ),
-                          );
-                        },
+                        onPressed: onEdit,
                         child: const Text("EDIT"),
                       ),
                     ),
