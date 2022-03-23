@@ -12,7 +12,17 @@ class _CheckInWidgetState extends State<CheckInWidget> {
   @override
   void initState() {
     super.initState();
-    checkIn();
+    checkIn().then((success) {
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Checked-in!'),
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Check-in failed! Try again.'),
+        ));
+      }
+    });
   }
 
   @override

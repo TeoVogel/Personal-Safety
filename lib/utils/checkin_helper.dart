@@ -1,15 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_safety/utils/checkin_time_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'database_preferences.dart';
+
 const lastCheckInKey = "last_check_in";
 
-Future<void> checkIn() async {
+Future<bool> checkIn() async {
   final prefs = await SharedPreferences.getInstance();
-  await Future.delayed(const Duration(seconds: 5));
-  int now = DateTime.now().millisecondsSinceEpoch;
-  prefs.setInt(lastCheckInKey, now);
-  print("check-in at $now");
+  DateTime now = DateTime.now();
+  prefs.setInt(lastCheckInKey, now.millisecondsSinceEpoch);
+
+  DocumentReference userDocument =
+      FirebaseFirestore.instance.collection('users').doc(await getUserId());
+  return userDocument.update({'lastCheckIn': now}).then((value) {
+    return true;
+  }).catchError((error) {
+    return false;
+  });
 }
 
 Future<DateTime> getLastCheckIn() async {
