@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'database_preferences.dart';
 
 const checkInTimeKey = "check_in_time";
 const checkInTimeDefaultValue = 700; // 7:00 AM
@@ -36,8 +39,16 @@ Future<int> _getCheckInTime() async {
   return prefs.getInt(checkInTimeKey) ?? checkInTimeDefaultValue;
 }
 
-void setCheckInTime(TimeOfDay checkInTime) async {
+Future<bool> setCheckInTime(TimeOfDay checkInTime) async {
   final prefs = await SharedPreferences.getInstance();
   int time = checkInTime.hour * 100 + checkInTime.minute;
   await prefs.setInt(checkInTimeKey, time);
+
+  DocumentReference userDocument =
+      FirebaseFirestore.instance.collection('users').doc(await getUserId());
+  return userDocument.update({'checkInTime': time}).then((value) {
+    return true;
+  }).catchError((error) {
+    return false;
+  });
 }

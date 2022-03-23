@@ -6,6 +6,8 @@ import 'package:personal_safety/utils/notification_service.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
+
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
