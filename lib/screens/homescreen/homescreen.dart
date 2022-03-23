@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     fetchCheckInData();
 
     // defines a timer
-    _timer = Timer.periodic(Duration(seconds: 10), (Timer t) {
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
       fetchCheckInData();
     });
   }
