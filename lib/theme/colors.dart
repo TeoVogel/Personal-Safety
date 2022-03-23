@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 const themeColor = Color(0xFF202731);
 
 const colorPrimary = Color(0xFF467EE5);
+Color colorPrimary20 = lighten(colorPrimary, 80);
+Color colorPrimary40 = lighten(colorPrimary, 60);
+Color colorPrimary80 = lighten(colorPrimary, 20);
 const onColorPrimary = Colors.white;
 const colorSecondary = Color(0xFFE6AE47);
 const onColorSecondary = Colors.white;
 const colorAccent = colorSecondary;
-Color colorBackground = lighten(colorPrimary, 92);
+Color colorBackground = lighten(colorPrimary, 90);
 const onColorBackground = Colors.black;
-Color colorSurface = lighten(colorPrimary, 96);
+Color colorSurface = lighten(colorPrimary, 98);
 const onColorSurface = onColorBackground;
 
 /// Construct a color from a hex code string, of the format #RRGGBB.

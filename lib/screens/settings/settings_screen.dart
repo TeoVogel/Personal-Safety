@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_safety/theme/colors.dart';
 import 'package:personal_safety/theme/themes.dart';
 import 'package:personal_safety/utils/checkin_time_preferences.dart';
 import 'package:personal_safety/utils/notification_service.dart';
@@ -115,43 +116,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: InkWell(
           onTap: action,
           borderRadius: ThemeUtils.mediumShapeBorderRadius,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                decoration: ShapeDecoration(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          ThemeUtils.mediumShapeBorderRadiusAmount),
+                      topRight: Radius.circular(
+                          ThemeUtils.mediumShapeBorderRadiusAmount),
+                    ),
+                  ),
+                  color: colorPrimary20,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
-                Text(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
                   content ?? "",
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          "tap to edit",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8, bottom: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        "tap to edit",
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
-                      const Icon(
-                        Icons.edit,
-                        size: 20,
-                      )
-                    ],
-                  ),
+                    ),
+                    const Icon(
+                      Icons.edit,
+                      size: 20,
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );

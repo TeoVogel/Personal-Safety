@@ -67,53 +67,70 @@ class _EditEmergencyContactState extends State<EditEmergencyContact> {
                     ListView(
                       shrinkWrap: true,
                       children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Icon(
-                                    Icons.person_outline,
-                                    size: 100,
-                                    color: colorPrimary.withAlpha(125),
-                                  ),
-                                ),
-                                Icon(
-                                  widget.emergencyContact == null
-                                      ? Icons.add
-                                      : Icons.edit,
-                                  size: 32,
-                                  color: colorPrimary.withAlpha(125),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                         Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Contact Name',
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: ShapeDecoration(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(ThemeUtils
+                                          .mediumShapeBorderRadiusAmount),
+                                      topRight: Radius.circular(ThemeUtils
+                                          .mediumShapeBorderRadiusAmount),
+                                    ),
                                   ),
-                                  controller: nameController,
+                                  color: colorPrimary20,
                                 ),
-                                const SizedBox(height: 16),
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Contact Phone Number',
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Stack(
+                                      alignment: Alignment.topRight,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Icon(
+                                            Icons.person_outline,
+                                            size: 80,
+                                            color: colorPrimary80,
+                                          ),
+                                        ),
+                                        Icon(
+                                          widget.emergencyContact == null
+                                              ? Icons.add
+                                              : Icons.edit,
+                                          size: 24,
+                                          color: colorPrimary80,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  controller: numberController,
                                 ),
-                              ],
-                            ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Contact Name',
+                                      ),
+                                      controller: nameController,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Contact Phone Number',
+                                      ),
+                                      controller: numberController,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

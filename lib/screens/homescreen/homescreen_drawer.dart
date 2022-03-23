@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/screens/test/dexterity_test_screen.dart';
 import 'package:personal_safety/theme/colors.dart';
+import 'package:personal_safety/utils/database_preferences.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 import 'package:personal_safety/utils/notification_service.dart';
 
@@ -23,27 +24,12 @@ class HomeScreenDrawer extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            color: lighten(colorPrimary, 80),
+            color: colorPrimary20,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  OutlinedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DexterityTestScreen(),
-                        ),
-                      );
-                    },
-                    label: const Text("DEXTERITY TEST"),
-                    icon: const Icon(Icons.warning_amber),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   OutlinedButton.icon(
                     onPressed: () {
                       Navigator.push(
@@ -69,10 +55,21 @@ class HomeScreenDrawer extends StatelessWidget {
                       const SizedBox(
                         width: 12,
                       ),
-                      Text(
-                        "Susan",
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
+                      FutureBuilder(
+                          future: getUserId(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<String> snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                snapshot.data!,
+                                style: Theme.of(context).textTheme.subtitle2,
+                              );
+                            }
+                            return Text(
+                              "",
+                              style: Theme.of(context).textTheme.subtitle2,
+                            );
+                          }),
                     ],
                   )
                 ],

@@ -39,8 +39,12 @@ abstract class ThemeUtils {
       ),
     ),
     cardTheme: CardTheme(
-        shape: mediumShape.copyWith(side: BorderSide(width: borderSideWidth)),
-        elevation: 2),
+        shape: mediumShape.copyWith(
+            side: BorderSide(
+          width: borderSideWidth,
+          color: colorPrimary80,
+        )),
+        elevation: 1),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(borderRadius: smallShapeBorderRadius),
     ),

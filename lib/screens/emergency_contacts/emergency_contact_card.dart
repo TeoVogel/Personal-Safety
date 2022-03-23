@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../../models/emergency_contact.dart';
-import 'edit_emergency_contact.dart';
+import 'package:personal_safety/theme/colors.dart';
+import 'package:personal_safety/theme/themes.dart';
 
 class EmergencyContactCard extends StatelessWidget {
   const EmergencyContactCard({
@@ -23,51 +22,74 @@ class EmergencyContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Icon(
-              Icons.person_outline,
-              size: 48,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      name,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              decoration: ShapeDecoration(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                        ThemeUtils.mediumShapeBorderRadiusAmount),
+                    bottomLeft: Radius.circular(
+                        ThemeUtils.mediumShapeBorderRadiusAmount),
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "${number}",
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                        onPressed: onEdit,
-                        child: const Text("EDIT"),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+                color: colorPrimary20,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Icon(
+                  Icons.person_outline,
+                  size: 48,
+                  color: colorPrimary80,
+                ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        name,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          const Icon(Icons.phone),
+                          const SizedBox(width: 5),
+                          Text(
+                            "${number}",
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: OutlinedButton(
+                          onPressed: onEdit,
+                          child: const Text("EDIT"),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

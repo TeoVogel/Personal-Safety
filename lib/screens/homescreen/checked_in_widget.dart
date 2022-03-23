@@ -36,7 +36,7 @@ class CheckedInWidget extends StatelessWidget {
           child: Icon(
             Icons.check_circle_outline_outlined,
             size: 250,
-            color: colorPrimary.withAlpha(125),
+            color: colorPrimary40,
           ),
         ),
         Text(
