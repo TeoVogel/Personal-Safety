@@ -77,12 +77,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     );
                   },
                 );
-                selectedTime.then((value) async {
-                  if (value == null) return;
-                  setCheckInTime(value);
-                  fetchCheckInTimePreferences();
-                  NotificationService().programNotification(value);
-                });
+                selectedTime.then(
+                  (value) async {
+                    if (value == null) return;
+                    setCheckInTime(value).then((success) {
+                      if (success) {
+                        fetchCheckInTimePreferences();
+                        NotificationService().programNotification(value);
+                      }
+                    });
+                  },
+                );
               },
               context,
             ),
