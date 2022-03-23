@@ -4,6 +4,7 @@ import 'package:personal_safety/models/emergency_contact.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
 
 import '../../theme/colors.dart';
+import '../../theme/themes.dart';
 
 class EditEmergencyContact extends StatefulWidget {
   const EditEmergencyContact(
@@ -126,18 +127,36 @@ class _EditEmergencyContactState extends State<EditEmergencyContact> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        _saveEmergencyContact(
-                          nameController.text,
-                          int.parse(numberController.text),
-                          widget.emergencyContact?.id,
-                        ).then(
-                          (value) => Navigator.pop(context),
-                        );
-                      },
-                      label: const Text("SAVE"),
-                      icon: const Icon(Icons.save_outlined),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (widget.emergencyContact != null)
+                          OutlinedButton.icon(
+                            onPressed: () {
+                              showDeleteEmergencyContactDialog(
+                                widget.emergencyContact!.id,
+                              );
+                            },
+                            label: const Text("DELETE"),
+                            icon: const Icon(Icons.delete_outline),
+                            style: ThemeUtils.getDeleteButtonStyle(),
+                          ),
+                        const SizedBox(height: 10),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            _saveEmergencyContact(
+                              nameController.text,
+                              int.parse(numberController.text),
+                              widget.emergencyContact?.id,
+                            ).then(
+                              (value) => Navigator.pop(context),
+                            );
+                          },
+                          label: const Text("SAVE"),
+                          icon: const Icon(Icons.save_outlined),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -168,5 +187,42 @@ class _EditEmergencyContactState extends State<EditEmergencyContact> {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
     }
+  }
+
+  void showDeleteEmergencyContactDialog(String id) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            shape: ThemeUtils.largeShape,
+            title: const Text('Delete Contact'),
+            content: const Text('Are you sure to delete this contact?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                },
+                child: const Text('CANCEL'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.of(context).pop();
+                  _deleteEmergencyContact(id);
+                },
+                child: const Text('DELETE'),
+                style: TextButton.styleFrom(primary: Colors.red),
+              ),
+            ],
+          );
+        });
+  }
+
+  void _deleteEmergencyContact(String id) {
+    widget.emergencyContactsReference.doc(id).delete().then((value) {
+      print("User Deleted");
+      Navigator.of(context).pop();
+    }).catchError((error) => print("Failed to add user: $error"));
   }
 }

@@ -85,4 +85,12 @@ abstract class ThemeUtils {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
     );
   }
+
+  static ButtonStyle getDeleteButtonStyle() {
+    return OutlinedButton.styleFrom(
+      primary: Colors.red,
+      side: BorderSide(width: borderSideWidth, color: Colors.red),
+      shape: smallShape,
+    );
+  }
 }
