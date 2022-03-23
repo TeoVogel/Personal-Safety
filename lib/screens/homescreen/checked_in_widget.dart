@@ -10,9 +10,6 @@ class CheckedInWidget extends StatelessWidget {
 
   String getCheckInTimeLabel() {
     DateTime now = DateTime.now();
-    print("getCheckInTimeLabel");
-    print(now.day);
-    print(nextCheckIn.day);
     String dayLabel = "Tomorrow";
     if (now.day == nextCheckIn.day) {
       dayLabel = "Today";
