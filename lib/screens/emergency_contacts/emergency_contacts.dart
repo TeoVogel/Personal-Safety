@@ -45,11 +45,7 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
-                return Text("Something went wrong");
-              }
-
-              if (!snapshot.hasData) {
-                return Text("Document does not exist");
+                return const Center(child: Text("Something went wrong"));
               }
 
               if (snapshot.connectionState == ConnectionState.done) {
