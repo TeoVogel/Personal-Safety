@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/utils/checkin_helper.dart';
+import 'package:personal_safety/utils/notification_service.dart';
 
 class DexterityTestWidget extends StatefulWidget {
   const DexterityTestWidget({Key? key}) : super(key: key);
@@ -60,7 +61,21 @@ class _DexterityTestWidgetState extends State<DexterityTestWidget> {
                 ElevatedButton.icon(
                   onPressed: () {
                     if (myController.text.toUpperCase() == "YES") {
-                      checkIn();
+                      checkIn().then((success) {
+                        if (success) {
+                          NotificationService()
+                              .programDexterityTestNotifications();
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Checked-in!'),
+                          ));
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('No internet connection! Try again.'),
+                          ));
+                        }
+                      });
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('You failed the test. Try again.'),

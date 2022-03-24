@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:personal_safety/utils/checkin_helper.dart';
+import 'package:personal_safety/utils/checkin_time_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -44,7 +46,7 @@ class NotificationService {
     //Handle notification tapped logic here
   }
 
-  Future<void> programNotification(TimeOfDay time) async {
+  Future<void> programCheckInNotification() async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
             "check_in_channel", //Required for Android 8.0 or after
@@ -72,13 +74,14 @@ class NotificationService {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
+    TimeOfDay checkInTime = await getCheckInTime();
     DateTime now = DateTime.now();
     DateTime scheduledDateTime = DateTime(
       now.year,
       now.month,
       now.day,
-      time.hour,
-      time.minute,
+      checkInTime.hour,
+      checkInTime.minute,
     );
     if (scheduledDateTime.isBefore(now)) {
       scheduledDateTime = scheduledDateTime.add(const Duration(days: 1));
@@ -94,6 +97,62 @@ class NotificationService {
         "Personal Safety",
         "Time to check-in!",
         tz.TZDateTime.from(utcScheduledDateTime, tz.UTC),
+        platformChannelSpecifics,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time);
+  }
+
+  Future<void> programDexterityTestNotifications() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+            "buffer_channel", //Required for Android 8.0 or after
+            "buffer_channel", //Required for Android 8.0 or after
+            channelDescription:
+                "Buffer window notifications", //Required for Android 8.0 or after
+            importance: Importance.high,
+            priority: Priority.high);
+
+    const IOSNotificationDetails iOSPlatformChannelSpecifics =
+        IOSNotificationDetails(
+      presentAlert: true,
+      presentSound: true,
+    );
+
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    DateTime lastCheckIn = await getLastCheckIn();
+    DateTime checkInWindow = await getCurrentOrUpcomingCheckInWindowStartTime();
+    if (lastCheckIn.isAfter(checkInWindow)) {
+      checkInWindow = checkInWindow.add(const Duration(days: 1));
+    }
+    DateTime bufferWindowStartTime =
+        checkInWindow.add(const Duration(hours: checkInTimeDurationInHours));
+
+    DateTime utcScheduledDateTime = bufferWindowStartTime.toUtc();
+    for (var i = 0; i < 4; i++) {
+      _programDexterityTestNotifications(
+        2 + i,
+        utcScheduledDateTime.add(Duration(minutes: 15 * i)),
+        platformChannelSpecifics,
+      );
+    }
+  }
+
+  Future<void> _programDexterityTestNotifications(
+    int id,
+    DateTime time,
+    platformChannelSpecifics,
+  ) async {
+    print("dexterityTestNotif $time");
+    return flutterLocalNotificationsPlugin.zonedSchedule(
+        id,
+        "Personal Safety",
+        "Are you okay? You haven't checked-in yet!",
+        tz.TZDateTime.from(time, tz.UTC),
         platformChannelSpecifics,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:

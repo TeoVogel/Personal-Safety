@@ -84,7 +84,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     setCheckInTime(value).then((success) {
                       if (success) {
                         fetchCheckInTimePreferences();
-                        NotificationService().programNotification(value);
+                        final notificationService = NotificationService();
+                        notificationService.programCheckInNotification();
+                        notificationService.programDexterityTestNotifications();
                       }
                     });
                   },

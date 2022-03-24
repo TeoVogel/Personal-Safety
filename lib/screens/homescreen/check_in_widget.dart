@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/utils/checkin_helper.dart';
 
+import '../../utils/notification_service.dart';
+
 class CheckInWidget extends StatefulWidget {
   const CheckInWidget({Key? key}) : super(key: key);
 
@@ -14,12 +16,13 @@ class _CheckInWidgetState extends State<CheckInWidget> {
     super.initState();
     checkIn().then((success) {
       if (success) {
+        NotificationService().programDexterityTestNotifications();
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Checked-in!'),
         ));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Check-in failed! Try again.'),
+          content: Text('No internet connection! Try again.'),
         ));
       }
     });
