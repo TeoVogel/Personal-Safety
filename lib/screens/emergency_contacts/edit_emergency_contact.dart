@@ -201,8 +201,8 @@ class _EditEmergencyContactState extends State<EditEmergencyContact> {
             "name": name,
             "number": number,
           })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
+          .then((value) => print("User Edited"))
+          .catchError((error) => print("Failed to edit user: $error"));
     }
   }
 
