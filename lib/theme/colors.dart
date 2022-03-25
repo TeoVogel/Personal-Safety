@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const themeColor = Color(0xFF202731);
 
-const colorPrimary = Color(0xFF467EE5);
+const colorPrimary = Color.fromRGBO(29, 73, 167, 1);
 Color colorPrimary20 = lighten(colorPrimary, 80);
 Color colorPrimary40 = lighten(colorPrimary, 60);
 Color colorPrimary80 = lighten(colorPrimary, 20);
