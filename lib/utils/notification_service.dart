@@ -94,7 +94,7 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
         1,
-        "Personal Safety",
+        "Perdiem",
         "Time to check-in!",
         tz.TZDateTime.from(utcScheduledDateTime, tz.UTC),
         platformChannelSpecifics,
@@ -150,7 +150,7 @@ class NotificationService {
     print("dexterityTestNotif $time");
     return flutterLocalNotificationsPlugin.zonedSchedule(
         id,
-        "Personal Safety",
+        "Perdiem",
         "Are you okay? You haven't checked-in yet!",
         tz.TZDateTime.from(time, tz.UTC),
         platformChannelSpecifics,
