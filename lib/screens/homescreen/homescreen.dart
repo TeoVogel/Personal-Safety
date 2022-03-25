@@ -7,7 +7,7 @@ import 'package:personal_safety/screens/homescreen/checked_in_widget.dart';
 import 'package:personal_safety/screens/homescreen/homescreen_drawer.dart';
 import 'package:personal_safety/screens/test/dexterity_test_widget.dart';
 import 'package:personal_safety/utils/checkin_helper.dart' as checkin_helper;
-import 'package:personal_safety/utils/database_preferences.dart';
+import 'package:personal_safety/utils/log_in_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);

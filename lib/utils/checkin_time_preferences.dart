@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'database_preferences.dart';
+import 'log_in_preferences.dart';
 
 const checkInTimeKey = "check_in_time";
 const checkInTimeDefaultValue = 700; // 7:00 AM

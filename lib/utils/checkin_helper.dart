@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_safety/utils/checkin_time_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'database_preferences.dart';
+import 'log_in_preferences.dart';
 
 const lastCheckInKey = "last_check_in";
 
