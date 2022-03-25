@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:personal_safety/screens/test/dexterity_test_screen.dart';
 import 'package:personal_safety/theme/colors.dart';
-import 'package:personal_safety/utils/database_preferences.dart';
+import 'package:personal_safety/utils/log_in_preferences.dart';
 import 'package:personal_safety/widgets/go_back_button.dart';
-import 'package:personal_safety/utils/notification_service.dart';
 
 import '../settings/settings_screen.dart';
 
