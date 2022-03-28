@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gng2102.uottawa.personal_safety">
    <application
-        android:label="personal_safety"
+        android:label="Perdiem"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

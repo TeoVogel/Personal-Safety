@@ -148,6 +148,7 @@ class NotificationService {
     platformChannelSpecifics,
   ) async {
     print("dexterityTestNotif $time");
+    await flutterLocalNotificationsPlugin.cancel(id);
     return flutterLocalNotificationsPlugin.zonedSchedule(
         id,
         "Perdiem",
