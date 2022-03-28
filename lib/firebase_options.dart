@@ -41,21 +41,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDTjcs9SwGuRAs5m8TPBykuROcUuikcC4s',
-    appId: '1:595577006629:android:156498ba6ffec7c5e32dcc',
-    messagingSenderId: '595577006629',
-    projectId: 'personal-safety-uottawa',
-    storageBucket: 'personal-safety-uottawa.appspot.com',
+    apiKey: 'AIzaSyBx2sYGcG1qUic10ZOkGrXtCkp1QOpgoA0',
+    appId: '1:753170767676:android:b7d3fa0809b65e46ae0839',
+    messagingSenderId: '753170767676',
+    projectId: 'gng2101-personalsafety',
+    databaseURL: 'https://gng2101-personalsafety-default-rtdb.firebaseio.com',
+    storageBucket: 'gng2101-personalsafety.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCYkMXJw660xH8gmR7raFsIwIOmI5ZaHTs',
-    appId: '1:595577006629:ios:eb564c81792c9c4ae32dcc',
-    messagingSenderId: '595577006629',
-    projectId: 'personal-safety-uottawa',
-    storageBucket: 'personal-safety-uottawa.appspot.com',
-    iosClientId:
-        '595577006629-op95so4ofh4kt9tq7ndhqd8crnj5g32l.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAtlq7p5Os_tEREPEYt_67PqAed8ZpCpTU',
+    appId: '1:753170767676:ios:dcc4412866c25ac3ae0839',
+    messagingSenderId: '753170767676',
+    projectId: 'gng2101-personalsafety',
+    databaseURL: 'https://gng2101-personalsafety-default-rtdb.firebaseio.com',
+    storageBucket: 'gng2101-personalsafety.appspot.com',
+    iosClientId: '753170767676-tfnvmsc8uea98jeifrg56p2q6788s8ni.apps.googleusercontent.com',
     iosBundleId: 'gng2102.uottawa.personalSafety',
   );
 }
