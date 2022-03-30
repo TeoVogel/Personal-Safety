@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gng2102.uottawa.personal_safety">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Perdiem"
         android:name="${applicationName}"
