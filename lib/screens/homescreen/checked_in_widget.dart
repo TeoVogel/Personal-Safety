@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_safety/theme/colors.dart';
-import 'package:personal_safety/utils/checkin_helper.dart';
+import 'package:personal_safety/utils/checkin_time_preferences.dart';
 
 class CheckedInWidget extends StatelessWidget {
   const CheckedInWidget({Key? key, required this.nextCheckIn})
@@ -9,8 +9,12 @@ class CheckedInWidget extends StatelessWidget {
   final DateTime nextCheckIn;
 
   String getCheckInTimeLabel() {
+    DateTime nextCheckIn = this.nextCheckIn;
     DateTime now = DateTime.now();
     String dayLabel = "Tomorrow";
+    if (now.isAfter(nextCheckIn)) {
+      nextCheckIn = nextCheckIn.add(const Duration(days: 1));
+    }
     if (now.day == nextCheckIn.day) {
       dayLabel = "Today";
     }
